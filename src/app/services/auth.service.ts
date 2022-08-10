@@ -44,4 +44,8 @@ export class AuthService {
 
     this.router.navigate(['/login']);
   }
+
+  public isAuthenticated(): boolean {
+    return !(typeof this.token === 'undefined' || this.token === null || this.token === '');
+  }
 }
