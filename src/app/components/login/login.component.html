@@ -1,1 +1,51 @@
-<p>Login form</p>
+<div class="full-content">
+    <div class="left-side">
+        <div class="logo">
+            <img [src]="logo"/>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="title">
+          Event Management System for Volunteers
+        </div>
+        <div class="subtitle">
+            <span>Access the system with your registered email and password</span> 
+        </div>
+        <mat-card class="prp-style">
+          <mat-card-content>
+            <form [formGroup]="loginForm" (submit)="login()">
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input
+                  matInput
+                  formControlName="email"
+                  placeholder="Email"
+                />
+              </mat-form-field>
+      
+              <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  type="password"
+                  formControlName="password"
+                  placeholder="Password"
+                />
+              </mat-form-field>
+              <mat-error *ngIf="errorLogin">Incorrect password</mat-error>
+              <button mat-button [disabled]="loadingLogin"
+                      [class.loading-button]="loadingLogin"
+                      mat-raised-button
+                      color="primary"
+              >Login</button>
+            </form>
+            <mat-progress-bar
+              mode="indeterminate"
+              color="primary"
+              *ngIf="loadingLogin"
+              class="login-progressbar"
+            ></mat-progress-bar>
+          </mat-card-content>
+        </mat-card>
+      </div>
+</div>

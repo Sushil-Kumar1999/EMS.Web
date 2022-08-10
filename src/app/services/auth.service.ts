@@ -17,8 +17,8 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   
-  public login(username: string, password: string): Observable<ILoginResponse> {
-    const request = { username, password };
+  public login(email: string, password: string): Observable<ILoginResponse> {
+    const request = { email, password };
 
     return this.httpClient.post<ILoginResponse>(`${this.baseUrl}/auth/login`,
       JSON.stringify(request),
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   public saveToken(loginEmail: string, token: string) : void {
-    localStorage.setItem('email', loginEmail);
+    localStorage.setItem('loginEmail', loginEmail);
     localStorage.setItem('token', token);
 
     this.loginEmail = loginEmail;
