@@ -16,6 +16,7 @@ export class LoginComponent {
   public receivedMessages: string[] = [];
   errorLogin = false;
   currentRequest:any;
+  hide = true;
   
   loginForm = new FormGroup({
     email: new FormControl({ disabled: this.loadingLogin, value: '' }, [
