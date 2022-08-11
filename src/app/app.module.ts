@@ -9,11 +9,13 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { ResponseInterceptor } from './interceptors/response.interceptor';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

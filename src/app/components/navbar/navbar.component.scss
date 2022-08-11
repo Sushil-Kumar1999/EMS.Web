@@ -1,0 +1,147 @@
+
+.mat-toolbar{
+  background-color: white;
+  color: white;
+}
+.toolbar-item {
+  color: white;
+  margin: 8px;
+  background-color: #517ea5;
+}
+.clickable-item{
+  cursor: pointer;
+  margin-right: 30px;
+}
+.scroll-container {
+  overflow: auto;
+  @media screen and (max-width: 600px) {
+    height: calc(100% - 56px);
+  }
+  @media screen and (min-width: 600px) {
+    height: calc(100% - 64px);
+  }
+}
+
+//lenguage selector
+
+.language-icon {
+  vertical-align: middle;
+}
+
+.right {
+  text-align: right;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+  flex-direction: row;
+  display: flex;
+  &__login-btn {
+    padding-left: 0;
+  }
+
+  &__user {
+    font-size: 14px;
+  }
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.left-navbar{
+  writing-mode: vertical-lr;
+}
+
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+.column-menu {
+  flex-basis: 20%;
+}
+.column-content {
+  flex-basis: 80%;
+  overflow: auto;
+}
+.active-option {
+  color: #2e2e2e;
+}
+.option-selected {
+  //background-color: lightgrey;
+  border-left: #2e2e2e solid 2px;
+}
+.mat-list-no-padding-top {
+  padding-top: 0px;
+}
+.menu-card {
+  margin: 16px;
+  border-radius: 34px;
+}
+.right-login-btn{
+  color: black;
+}
+.language-icon{
+  color: black;
+}
+.right-user{
+  color: black;
+}
+
+
+
+
+.container{
+  width: 100%;
+  //height: calc(100vh - 64px);
+  height: 100%;
+}
+.settings-wrapper{
+  min-height: 100%;
+  background-color: #f8f9fb;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+.column-menu {
+  flex-basis: 20%;
+}
+.column-content {
+  flex-basis: 80%;
+  overflow: auto;
+}
+.active-option {
+  //color: #50979b;
+  color: white;
+}
+.option-selected {
+  //background-color: lightgrey;
+  //border-left: #50979b solid 2px;
+  color: white;
+  background-color:  #50979b;
+}
+.mat-list {
+  color: #adb5bd !important;
+}
+.mat-list-no-padding-top {
+  padding-top: 0px;
+  color: #adb5bd;
+}
+.menu-card {
+  margin: 16px;
+}
+.clickable-item{
+  cursor: pointer;
+}

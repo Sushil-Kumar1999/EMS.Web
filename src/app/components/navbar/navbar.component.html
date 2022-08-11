@@ -1,0 +1,41 @@
+<mat-toolbar >
+
+    <div class="right">
+      <div class="right-user" *ngIf="userName">{{userName}}</div>
+      <!--Logout Button-->
+      <button mat-button (click)="logout()" class="right-login-btn">
+        <mat-icon matTooltip="Logout">exit_to_app</mat-icon>
+      </button>
+    </div>
+</mat-toolbar>
+
+<!-- Body container -->
+<div class="container">
+  <div class="settings-wrapper">
+    <!--Row full width and height-->
+    <div class="row">
+      <!--Menu div-->
+      <div style="width: 30%" class="column column-menu">
+        <mat-card class="menu-card">
+          <mat-card-content>
+            <mat-list class="mat-list-no-padding-top list-horizontal">
+              <mat-list-item [class.option-selected]="option.selected" *ngFor="let option of menu_options">
+                <mat-icon >{{option.icon}}</mat-icon>
+                <button mat-button [class.active-option]="option.selected" [routerLink]="[option.url]"
+                  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}"
+                  (click)="onSelect(option.id)"> 
+                  {{option.label}} 
+                </button>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <!--Content panel-->
+      <div style="width: 70%" class="column column-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+  
