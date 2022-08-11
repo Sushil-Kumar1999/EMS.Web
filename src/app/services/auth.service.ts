@@ -18,13 +18,13 @@ export class AuthService {
 
   
   public login(email: string, password: string): Observable<ILoginResponse> {
-    const request = { email, password };
+    const request = {
+      Email: email,
+      Password: password
+    }
 
-    return this.httpClient.post<ILoginResponse>(`${this.baseUrl}/auth/login`,
-      JSON.stringify(request),
-      {
-        headers: new HttpHeaders().append('Content-Type', 'application/json'),
-      });
+
+    return this.httpClient.post<ILoginResponse>(`${this.baseUrl}/auth/login`, request);
   }
 
   public saveToken(loginEmail: string, token: string) : void {

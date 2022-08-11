@@ -10,12 +10,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { ResponseInterceptor } from './interceptors/response.interceptor';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

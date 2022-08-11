@@ -45,9 +45,9 @@ export class LoginComponent {
             localStorage.setItem('loginEmail', this.loginForm.getRawValue().email as string);
             localStorage.setItem('token', loginResponse.token);
             this.loadingLogin = false;
-            //this.router.navigate(['/home']);
+            this.router.navigate(['/dashboard']);
           },
-          error: error =>{
+          error: error => {
             console.log(error);
             this.loadingLogin = false;
             this.loginForm.enable();
