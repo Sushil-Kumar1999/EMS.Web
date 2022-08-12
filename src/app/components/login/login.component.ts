@@ -31,7 +31,6 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-
   public login() : void {
     if (this.loginForm.valid) {
       this.loadingLogin = true;

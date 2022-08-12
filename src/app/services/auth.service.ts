@@ -13,6 +13,7 @@ export class AuthService {
   loginEmail: string|any;
   token: string|any;
   baseUrl = environment.baseUrl;
+  public LOGGED_IN_USER_ROLE: string = '';
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -22,9 +23,9 @@ export class AuthService {
       Email: email,
       Password: password
     }
-
-
-    return this.httpClient.post<ILoginResponse>(`${this.baseUrl}/auth/login`, request);
+    const response = this.httpClient.post<ILoginResponse>(`${this.baseUrl}/auth/login`, request);
+    this.getUserRole();
+    return response;
   }
 
   public saveToken(loginEmail: string, token: string) : void {
@@ -47,5 +48,21 @@ export class AuthService {
 
   public isLoggedIn(): boolean {
     return !(typeof this.token === 'undefined' || this.token === null || this.token === '');
+  }
+
+  private parseJwt (token: string) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('')
+    .map(function(c: string) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+  };
+
+  private getUserRole(): void {
+    const tokenPayload = this.parseJwt(localStorage.getItem('token') as string);
+    this.LOGGED_IN_USER_ROLE = tokenPayload.role;
   }
 }
