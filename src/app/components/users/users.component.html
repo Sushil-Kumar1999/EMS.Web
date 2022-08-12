@@ -1,62 +1,82 @@
-<div class="full-content">
-    <div class="wrapper">
-        <div class="title">
-          Register New User
-        </div>
-        <mat-card class="prp-style">
-          <mat-card-content>
-            <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
-                <mat-form-field appearance="outline">
-                    <mat-label>First Name</mat-label>
-                    <input
-                        matInput
-                        formControlName="firstName"
-                        placeholder="First Name"
-                    />
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Last Name</mat-label>
-                    <input
-                        matInput
-                        formControlName="lastName"
-                        placeholder="Last Name"
-                    />
-                </mat-form-field>
-      
-                <mat-form-field appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input
-                        matInput
-                        formControlName="email"
-                        placeholder="Email"
-                    />
-                </mat-form-field>
-                
-                <mat-form-field appearance="fill">
-                    <mat-label>Role</mat-label>
-                    <mat-select formControlName="role">
-                        <mat-option value="Admin">Admin</mat-option>
-                        <mat-option value="Organiser">Organiser</mat-option>
-                        <mat-option value="Volunteer">Voluneer</mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <button mat-button [disabled]="loadingLogin"
-                        [class.loading-button]="loadingLogin"
-                        mat-raised-button
-                        color="primary"
-                >Register</button>
-            </form>
-
-            <mat-progress-bar
-              mode="indeterminate"
-              color="primary"
-              *ngIf="loadingLogin"
-              class="login-progressbar"
-            ></mat-progress-bar>
-          </mat-card-content>
-        </mat-card>
-      </div>
+<div>
+    <mat-card  class="user-card margin-top-16px">
+        <mat-card-header>
+            <mat-card-title>Users</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="table-wrapper">
+                <table mat-table [dataSource]="dataSource">
+                    <!--Name Column-->
+                    <ng-container matColumnDef="firstName">
+                        <!-- <th mat-header-cell class="w-75" *matHeaderCellDef>#{{'settings.id' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>First Name</th>
+                        <td mat-cell *matCellDef="let element">{{element.firstName}}</td>
+                    </ng-container>
+                    <!--Surname Column-->
+                    <ng-container matColumnDef="lastName">
+                        <!-- <th mat-header-cell class="w-75" *matHeaderCellDef>#{{'settings.id' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>Last Name</th>
+                        <td mat-cell *matCellDef="let element">{{element.lastName}}</td>
+                    </ng-container>
+                    <!--Mail Column-->
+                    <ng-container matColumnDef="email">
+                        <!-- <th mat-header-cell *matHeaderCellDef>{{'settings.name' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>Email</th>
+                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    </ng-container>
+                    <!--Role Column-->
+                    <ng-container matColumnDef="role">
+                        <!-- <th mat-header-cell *matHeaderCellDef>{{'settings.actions' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>Role</th>
+                        <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+                    </ng-container>
+                    <!--Actions Column-->
+                    <ng-container matColumnDef="actions">
+                        <!-- <th mat-header-cell *matHeaderCellDef>{{'settings.actions' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>Actions</th>
+                        <td mat-cell *matCellDef="let element" class="selectable-cell">
+                            <button mat-button (click)="onUpdate(element)">
+                                <mat-icon class="icon-action" 
+                                    #tooltip="matTooltip"
+                                    matTooltip="Editar registro"
+                                    matTooltipPosition="below">
+                                    edit
+                                </mat-icon>
+                            </button>
+                            <button mat-button (click)="onDelete(element)">
+                                <mat-icon  class="icon-action" 
+                                    #tooltip="matTooltip"
+                                    matTooltip="Eliminar registro"
+                                    matTooltipPosition="below">
+                                    delete
+                                </mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <!--Add Column-->
+                    <ng-container matColumnDef="add">
+                        <th mat-header-cell *matHeaderCellDef>
+                        <button mat-mini-fab class="mat-fab-table"
+                                (click)="onAdd()"
+                                disabled="false">
+                            <mat-icon #tooltip="matTooltip"
+                                matTooltip="Nuevo Usuario"
+                                matTooltipPosition="below">
+                                add
+                            </mat-icon>
+                        </button>
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="selectable-cell"></td>
+                    </ng-container>
+                    <!--Headers-->
+                    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+                </table>
+                <div class="loader-wrapper" *ngIf="isLoadingUsers">
+                    <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+                </div>
+                <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="length" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </div>
-

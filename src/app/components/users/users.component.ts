@@ -1,19 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { IRegisterUserRequest } from 'src/app/models/register-user-request.model';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
+import { tap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { IUser } from 'src/app/models/user.model';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit, AfterViewInit {
 
-  loadingLogin = false;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  pageSizeOptions = [5, 10];
 
-  constructor(private usersService: UsersService) { }
+  dataSource!: MatTableDataSource<IUser>;
+  tableColumns: string[] = ['firstName', 'lastName', 'email', 'role', 'actions', 'add'];
+
+  length = 0;
+  dataLoaded: boolean = false;
+  isLoadingUsers: boolean = false;
+
+  constructor(public dialog: MatDialog, private usersService: UsersService) {}
+
+  ngOnInit(): void {
+    this.loadUsers();
+    
+  }
+
+  ngAfterViewInit() {
+    // this.dataSource.paginator = this.paginator;
+  }
 
   registerForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
@@ -47,14 +69,24 @@ export class UsersComponent {
       });
   }
 
-  // private createReuestBody() {
-  //   const user: IRegisterUserRequest = {
-  //     firstName: this.registerForm.value.firstName,
-  //     lastName = this.registerForm.getRawValue().lastName,
-  //     email = this.registerForm.getRawValue().email,
-  //     role = this.registerForm.getRawValue().role,
-  //   }
-  //   return user;
-  // }
+  loadUsers() {
+    this.usersService.listUsers().subscribe((users : IUser[]) => {
+      this.dataSource = new MatTableDataSource<IUser>(users);
+      this.dataSource.paginator = this.paginator;
+      this.length = users.length;
+      this.dataLoaded = true;
+     });
+  }
 
+  onAdd() {
+    console.log("add");
+  }
+
+  onDelete(user:any) {
+    console.log(user);
+  }
+
+  onUpdate(user:any) {
+    console.log(user);
+  }
 }
