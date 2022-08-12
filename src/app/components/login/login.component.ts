@@ -41,8 +41,7 @@ export class LoginComponent {
           next: (loginResponse: ILoginResponse) => {
             this.currentRequest = loginResponse;
             this.authService.saveToken(this.loginForm.getRawValue().email as string, loginResponse.token);
-            localStorage.setItem('loginEmail', this.loginForm.getRawValue().email as string);
-            localStorage.setItem('token', loginResponse.token);
+            this.authService.setLoggedInUserRole();
             this.loadingLogin = false;
             this.router.navigate(['/dashboard']);
           },
