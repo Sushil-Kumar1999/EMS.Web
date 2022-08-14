@@ -23,9 +23,6 @@ export class RegisterUserComponent {
   });
 
   public registerUser(): void {
-    // if (!this.registerForm.valid) {
-    //   return;
-    // }
     this.showProgressBar = true;
     this.usersService.registerUser(this.registerForm.value as IRegisterUserRequest)
       .subscribe({
@@ -49,9 +46,4 @@ export class RegisterUserComponent {
         }
       });
   }
-
-  exitDialog() {
-    
-  }
-
 }
