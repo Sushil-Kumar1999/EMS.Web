@@ -73,13 +73,14 @@ export class UsersComponent implements OnInit {
      });
   }
 
-  onCreateNewUser() {
+  openRegisterUserForm() {
     const config = new MatDialogConfig();
     config.disableClose = true;
     config.autoFocus = true;
     config.width = "500px";
 
-    this.dialog.open(RegisterUserComponent, config);
+    var ref = this.dialog.open(RegisterUserComponent, config);
+    ref.afterClosed().subscribe(() => this.loadUsers());
   }
 
   onDelete(user:any) {

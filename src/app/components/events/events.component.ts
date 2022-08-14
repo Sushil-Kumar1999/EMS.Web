@@ -34,7 +34,8 @@ export class EventsComponent implements OnInit {
     config.autoFocus = true;
     config.width = "500px";
 
-    this.dialog.open(CreateEventComponent, config);
+    var ref = this.dialog.open(CreateEventComponent, config);
+    ref.afterClosed().subscribe(() => this.loadEvents());
   }
   
   public loadEvents() : void {
