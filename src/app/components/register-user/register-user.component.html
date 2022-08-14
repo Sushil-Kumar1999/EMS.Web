@@ -1,0 +1,64 @@
+<div class="full-content">
+    <div mat-dialog-title class="mat-header">
+        <h2>Register New User</h2>
+        <button mat-icon-button mat-dialog-close aria-label="close dialog">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-card>
+        <mat-card-content>
+            <form class="wrapper" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input
+                        matInput
+                        formControlName="firstName"
+                        placeholder="First Name"
+                    />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input
+                        matInput
+                        formControlName="lastName"
+                        placeholder="Last Name"
+                    />
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input
+                        matInput
+                        formControlName="email"
+                        placeholder="Email"
+                    />
+                </mat-form-field>
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="role">
+                        <mat-option value="Admin">Admin</mat-option>
+                        <mat-option value="Organiser">Organiser</mat-option>
+                        <mat-option value="Volunteer">Voluneer</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button mat-button [disabled]="!this.registerForm.valid"
+                        mat-raised-button
+                        color="primary"
+                >Register</button>
+            </form>
+
+            <mat-progress-bar
+                mode="indeterminate"
+                color="primary"
+                *ngIf="showProgressBar"
+                class="login-progressbar"
+            ></mat-progress-bar>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+

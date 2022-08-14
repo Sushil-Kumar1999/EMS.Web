@@ -1,20 +1,20 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { IRegisterUserRequest } from 'src/app/models/register-user-request.model';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
-import { tap } from 'rxjs/operators';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { IUser } from 'src/app/models/user.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { RegisterUserComponent } from '../register-user/register-user.component';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit, AfterViewInit {
+export class UsersComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   pageSizeOptions = [5, 10];
@@ -23,7 +23,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
   tableColumns: string[] = ['firstName', 'lastName', 'email', 'role', 'actions', 'add'];
 
   length = 0;
-  dataLoaded: boolean = false;
   isLoadingUsers: boolean = false;
 
   constructor(public dialog: MatDialog, private usersService: UsersService) {}
@@ -31,10 +30,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.loadUsers();
     
-  }
-
-  ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
   }
 
   registerForm = new FormGroup({
@@ -74,12 +69,16 @@ export class UsersComponent implements OnInit, AfterViewInit {
       this.dataSource = new MatTableDataSource<IUser>(users);
       this.dataSource.paginator = this.paginator;
       this.length = users.length;
-      this.dataLoaded = true;
      });
   }
 
-  onAdd() {
-    console.log("add");
+  onCreateNewUser() {
+    const config = new MatDialogConfig();
+    config.disableClose = true;
+    config.autoFocus = true;
+    config.width = "500px";
+
+    this.dialog.open(RegisterUserComponent, config);
   }
 
   onDelete(user:any) {

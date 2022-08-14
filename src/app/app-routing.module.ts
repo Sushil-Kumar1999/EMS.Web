@@ -10,8 +10,8 @@ const routes: Routes = [
   {   
     path: '',
     component: NavbarComponent,
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
+    // canActivate: [AuthGuard],
+    // canActivateChild: [AuthGuard],
     children: [
       { path: 'dashboard', component: UsersComponent },
       { path: 'users', component: UsersComponent },

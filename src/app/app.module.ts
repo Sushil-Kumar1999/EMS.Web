@@ -12,6 +12,7 @@ import { ResponseInterceptor } from './interceptors/response.interceptor';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UsersComponent } from './components/users/users.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     LoginComponent,
     NavbarComponent,
     UsersComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RegisterUserComponent
   ],
   imports: [
     BrowserModule,
