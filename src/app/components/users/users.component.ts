@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit {
   tableColumns: string[] = ['firstName', 'lastName', 'email', 'role', 'actions', 'add'];
 
   length = 0;
-  isLoadingUsers: boolean = false;
+  isLoadingUsers: boolean = true;
 
   constructor(public dialog: MatDialog, private usersService: UsersService) {}
 
@@ -69,6 +69,7 @@ export class UsersComponent implements OnInit {
       this.dataSource = new MatTableDataSource<IUser>(users);
       this.dataSource.paginator = this.paginator;
       this.length = users.length;
+      this.isLoadingUsers = false;
      });
   }
 
