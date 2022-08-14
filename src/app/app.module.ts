@@ -15,6 +15,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { EventsComponent } from './components/events/events.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CreateEventComponent } from './components/create-event/create-event.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     NotFoundComponent,
     RegisterUserComponent,
     EventsComponent,
-    DashboardComponent
+    DashboardComponent,
+    CreateEventComponent
   ],
   imports: [
     BrowserModule,

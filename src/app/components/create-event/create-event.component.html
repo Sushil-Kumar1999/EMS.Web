@@ -1,0 +1,53 @@
+<div class="full-content">
+    <div mat-dialog-title class="mat-header">
+        <h2>Create New Event</h2>
+        <button mat-icon-button mat-dialog-close aria-label="close dialog">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-card>
+        <mat-card-content>
+            <form class="wrapper" [formGroup]="createEventForm" (ngSubmit)="createEvent()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input
+                        matInput
+                        formControlName="name"
+                        placeholder="Name of event"
+                    />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Start Date</mat-label>
+                    <input
+                        matInput
+                        type="datetime-local"
+                        formControlName="startDate"
+                        (event)="hello($event)"
+                    />
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>End date</mat-label>
+                    <input
+                        matInput
+                        type="datetime-local"
+                        formControlName="endDate"
+                    />
+                </mat-form-field>
+
+                <button mat-button [disabled]="!this.createEventForm.valid"
+                        mat-raised-button
+                        color="primary"
+                >Create Event</button>
+            </form>
+
+            <mat-progress-bar
+                mode="indeterminate"
+                color="primary"
+                *ngIf="showProgressBar"
+                class="login-progressbar"
+            ></mat-progress-bar>
+        </mat-card-content>
+    </mat-card>
+</div>

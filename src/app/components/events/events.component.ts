@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { IEvent } from 'src/app/models/event.model';
 import { EventsService } from 'src/app/services/events.service';
-import { RegisterUserComponent } from '../register-user/register-user.component';
+import { CreateEventComponent } from '../create-event/create-event.component';
 
 @Component({
   selector: 'app-events',
@@ -28,13 +28,13 @@ export class EventsComponent implements OnInit {
     this.loadEvents();
   }
 
-  public onCreateNewEvent() : void{
+  public openCreateEventDialog() : void{
     const config = new MatDialogConfig();
     config.disableClose = true;
     config.autoFocus = true;
     config.width = "500px";
 
-    this.dialog.open(RegisterUserComponent, config);
+    this.dialog.open(CreateEventComponent, config);
   }
   
   public loadEvents() : void {
@@ -53,5 +53,5 @@ export class EventsComponent implements OnInit {
   onUpdate(event: IEvent) {
     console.log(event);
   }
-
 }
+

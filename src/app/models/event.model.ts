@@ -3,3 +3,5 @@ export interface IEvent {
     startDate: Date;
     endDate: Date;
 }
+
+export interface ICreateEventRequest extends IEvent {}
