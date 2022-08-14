@@ -1,0 +1,77 @@
+<div>
+    <mat-card  class="user-card margin-top-16px">
+        <mat-card-header>
+            <mat-card-title>Users</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="table-wrapper">
+                <table mat-table [dataSource]="dataSource">
+                    <!--Name Column-->
+                    <ng-container matColumnDef="name">
+                        <!-- <th mat-header-cell class="w-75" *matHeaderCellDef>#{{'settings.id' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>Name</th>
+                        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="startDate">
+                        <!-- <th mat-header-cell class="w-75" *matHeaderCellDef>#{{'settings.id' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>Start Date</th>
+                        <td mat-cell *matCellDef="let element">{{element.startDate | date:'medium'}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="endDate">
+                        <!-- <th mat-header-cell *matHeaderCellDef>{{'settings.name' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>End Date</th>
+                        <td mat-cell *matCellDef="let element"> {{element.endDate | date:'medium'}} </td>
+                    </ng-container>
+
+                    <!--Actions Column-->
+                    <ng-container matColumnDef="actions">
+                        <!-- <th mat-header-cell *matHeaderCellDef>{{'settings.actions' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>Actions</th>
+                        <td mat-cell *matCellDef="let element" class="selectable-cell">
+                            <button mat-button (click)="onUpdate(element)">
+                                <mat-icon class="icon-action" 
+                                    #tooltip="matTooltip"
+                                    matTooltip="Update Event"
+                                    matTooltipPosition="below">
+                                    edit
+                                </mat-icon>
+                            </button>
+                            <button mat-button (click)="onDelete(element)">
+                                <mat-icon  class="icon-action" 
+                                    #tooltip="matTooltip"
+                                    matTooltip="Delete Event"
+                                    matTooltipPosition="below">
+                                    delete
+                                </mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <!--Add Column-->
+                    <ng-container matColumnDef="add">
+                        <th mat-header-cell *matHeaderCellDef>
+                        <button mat-mini-fab class="mat-fab-table"
+                                (click)="onCreateNewEvent()"
+                                disabled="false">
+                            <mat-icon #tooltip="matTooltip"
+                                matTooltip="Create New Event"
+                                matTooltipPosition="below">
+                                add
+                            </mat-icon>
+                        </button>
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="selectable-cell"></td>
+                    </ng-container>
+                    <!--Headers-->
+                    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+                </table>
+                <div class="loader-wrapper" *ngIf="isLoadingEvents">
+                    <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+                </div>
+                <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="length" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
