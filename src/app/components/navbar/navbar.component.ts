@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.menu_options.push(
-      {id: 0, url: '/home', icon: 'dashboard', label: 'Dashboard', selected: true},
+      {id: 0, url: '/dashboard', icon: 'dashboard', label: 'Dashboard', selected: true},
       {id: 1, url: '/users', icon: 'supervisor_account', label: 'Users', selected: false},
       {id: 2, url: '/events', icon: 'event', label: 'Events', selected: false},
     );
