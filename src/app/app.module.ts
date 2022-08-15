@@ -16,6 +16,8 @@ import { RegisterUserComponent } from './components/register-user/register-user.
 import { EventsComponent } from './components/events/events.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateEventComponent } from './components/create-event/create-event.component';
+import { jqxSchedulerModule } from 'jqwidgets-ng/jqxscheduler';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { CreateEventComponent } from './components/create-event/create-event.com
     RegisterUserComponent,
     EventsComponent,
     DashboardComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { CreateEventComponent } from './components/create-event/create-event.com
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    jqxSchedulerModule
   ],
   providers: [
     { 
