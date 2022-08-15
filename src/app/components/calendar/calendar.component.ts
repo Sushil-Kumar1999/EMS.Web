@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { jqxSchedulerComponent } from 'jqwidgets-ng/jqxscheduler';
-import { IEvent } from 'src/app/models/event.model';
+import { ICreateEventRequest } from 'src/app/models/event.model';
 import { EventsService } from 'src/app/services/events.service';
 import Swal from 'sweetalert2';
 
@@ -69,15 +69,23 @@ export class CalendarComponent implements AfterViewInit {
 
   createNewEvent(event: any): void{
     let appointment = event.args.appointment.originalData;
-    console.log(appointment);
-    // this.eventsService.createEvent(event)
-    //   .subscribe(() => {
-    //     Swal.fire({
-    //       title: 'Success',
-    //       text: 'New event created successfully',
-    //       icon: 'success',
-    //       showCloseButton: true
-    //     });
-    //   });
+   
+    const newEvent: ICreateEventRequest = {
+      title: appointment.title,
+      description :appointment.description,
+      location: appointment.location,
+      startDate: appointment.startDate,
+      endDate: appointment.endDate
+    };
+
+    this.eventsService.createEvent(newEvent)
+      .subscribe(() => {
+        Swal.fire({
+          title: 'Success',
+          text: 'New event created successfully',
+          icon: 'success',
+          showCloseButton: true
+        });
+      });
   }
 }
