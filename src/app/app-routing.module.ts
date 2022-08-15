@@ -16,8 +16,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
-      { path: 'calendar', component: CalendarComponent },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'calendar', component: CalendarComponent },
       { path: 'users', component: UsersComponent },
       { path: 'events', component: EventsComponent },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'}

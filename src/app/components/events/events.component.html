@@ -1,16 +1,16 @@
 <div>
     <mat-card  class="user-card margin-top-16px">
         <mat-card-header>
-            <mat-card-title>Users</mat-card-title>
+            <mat-card-title>Events</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <div class="table-wrapper">
                 <table mat-table [dataSource]="dataSource">
                     <!--Name Column-->
-                    <ng-container matColumnDef="name">
+                    <ng-container matColumnDef="title">
                         <!-- <th mat-header-cell class="w-75" *matHeaderCellDef>#{{'settings.id' | translate}}</th> -->
-                        <th mat-header-cell *matHeaderCellDef>Name</th>
-                        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                        <th mat-header-cell *matHeaderCellDef>Title</th>
+                        <td mat-cell *matCellDef="let element">{{element.title}}</td>
                     </ng-container>
 
                     <ng-container matColumnDef="startDate">
@@ -30,39 +30,17 @@
                         <!-- <th mat-header-cell *matHeaderCellDef>{{'settings.actions' | translate}}</th> -->
                         <th mat-header-cell *matHeaderCellDef>Actions</th>
                         <td mat-cell *matCellDef="let element" class="selectable-cell">
-                            <button mat-button (click)="onUpdate(element)">
+                            <button mat-button (click)="invite(element)">
                                 <mat-icon class="icon-action" 
                                     #tooltip="matTooltip"
-                                    matTooltip="Update Event"
+                                    matTooltip="Invite volunteers"
                                     matTooltipPosition="below">
-                                    edit
-                                </mat-icon>
-                            </button>
-                            <button mat-button (click)="onDelete(element)">
-                                <mat-icon  class="icon-action" 
-                                    #tooltip="matTooltip"
-                                    matTooltip="Delete Event"
-                                    matTooltipPosition="below">
-                                    delete
+                                schedule_send
                                 </mat-icon>
                             </button>
                         </td>
                     </ng-container>
-                    <!--Add Column-->
-                    <ng-container matColumnDef="add">
-                        <th mat-header-cell *matHeaderCellDef>
-                        <button mat-mini-fab class="mat-fab-table"
-                                (click)="openCreateEventDialog()"
-                                disabled="false">
-                            <mat-icon #tooltip="matTooltip"
-                                matTooltip="Create New Event"
-                                matTooltipPosition="below">
-                                add
-                            </mat-icon>
-                        </button>
-                        </th>
-                        <td mat-cell *matCellDef="let element" class="selectable-cell"></td>
-                    </ng-container>
+                    
                     <!--Headers-->
                     <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>

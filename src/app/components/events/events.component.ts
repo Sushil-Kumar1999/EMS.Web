@@ -17,7 +17,7 @@ export class EventsComponent implements OnInit {
   pageSizeOptions = [5, 10];
 
   dataSource!: MatTableDataSource<IEvent>;
-  tableColumns: string[] = ['name', 'startDate', 'endDate', 'actions', 'add'];
+  tableColumns: string[] = ['title', 'startDate', 'endDate', 'actions'];
 
   length = 0;
   isLoadingEvents: boolean = true;
@@ -28,16 +28,6 @@ export class EventsComponent implements OnInit {
     this.loadEvents();
   }
 
-  public openCreateEventDialog() : void{
-    const config = new MatDialogConfig();
-    config.disableClose = true;
-    config.autoFocus = true;
-    config.width = "500px";
-
-    var ref = this.dialog.open(CreateEventComponent, config);
-    ref.afterClosed().subscribe(() => this.loadEvents());
-  }
-  
   public loadEvents() : void {
     this.eventsService.listEvents().subscribe((events : Array<IEvent>) => {
       this.dataSource = new MatTableDataSource<IEvent>(events);
@@ -47,11 +37,7 @@ export class EventsComponent implements OnInit {
      });
   }
 
-  onDelete(event: IEvent) {
-    console.log(event);
-  }
-
-  onUpdate(event: IEvent) {
+  public invite(event: IEvent) {
     console.log(event);
   }
 }
