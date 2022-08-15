@@ -11,7 +11,6 @@ export class CalendarComponent implements AfterViewInit {
 
   @ViewChild('schedulerReference', { static: false }) scheduler!: jqxSchedulerComponent;
   views: string[] = [ "dayView", "weekView", "monthView"];
-
   source: any =
   {
     dataType: "array",
@@ -26,7 +25,7 @@ export class CalendarComponent implements AfterViewInit {
     id: 'id'
   };
   dataAdapter: any = new jqx.dataAdapter(this.source);
-  date: any = new jqx.date(2022, 8, 12);
+  //date: any = new jqx.date(2022, 8, 12);
   appointmentDataFields: jqwidgets.SchedulerAppointmentDataFields =
   {
       from: "startDate",
@@ -40,26 +39,20 @@ export class CalendarComponent implements AfterViewInit {
   constructor(private eventsService: EventsService ) { }
   
   ngAfterViewInit(): void {
-    this.scheduler.ensureAppointmentVisible("id1");
     this.getEvents();
   }
 
   getEvents() {
-    this.eventsService.getMockEvents().subscribe(mocks => {
-      console.log(mocks);
-      mocks.forEach(m => this.scheduler.addAppointment(m));
-    });
-
-    // this.eventsService.listEvents().subscribe(events => {
-    //   events.forEach(e => this.scheduler.addAppointment(e));
-    // });
+    this.eventsService.listEvents()
+    .subscribe(events => 
+      events.forEach(e => this.scheduler.addAppointment(e))
+    );
   }
 
   // called when the dialog is craeted.
-  editDialogCreate = (dialog?: jqwidgets.SchedulerEditDialogCreate['dialog'],
-                    fields?: jqwidgets.SchedulerEditDialogCreate['fields'],
-                    editAppointment?: jqwidgets.SchedulerEditDialogCreate['editAppointment']) => {
-
+  editDialogCreate(dialog?: jqwidgets.SchedulerEditDialogCreate['dialog'],
+                  fields?: jqwidgets.SchedulerEditDialogCreate['fields'],
+                  editAppointment?: jqwidgets.SchedulerEditDialogCreate['editAppointment']) {
     fields.repeatContainer.hide();
     fields.statusContainer.hide();
     fields.timeZoneContainer.hide();
