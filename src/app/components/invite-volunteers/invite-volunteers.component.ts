@@ -4,8 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { IEvent } from 'src/app/models/event.model';
+import { ISendInvitationRequest, VolunteerDetails } from 'src/app/models/invitation.model';
 import { IFindVolunteersCriteria, IUser } from 'src/app/models/user.model';
-import { EventsService } from 'src/app/services/events.service';
+import { InvitationsService } from 'src/app/services/invitations.service';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
 
@@ -25,7 +26,7 @@ export class InviteVolunteersComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public selectedEvent: IEvent,
               private dialogRef: MatDialogRef<InviteVolunteersComponent>,
               private usersService: UsersService,
-              private eventsService: EventsService) { }
+              private invitationsService: InvitationsService) { }
   
   criteriaForm = new FormGroup({
     minAge: new FormControl(1, [Validators.required]),
@@ -49,9 +50,14 @@ export class InviteVolunteersComponent {
   }
 
   public sendInvitation(): void {
-    console.log(this.selectedEvent);
-    let volunteerEmails: Array<string> = this.dataSource.data.map(v => v.email);
-    this.eventsService.sendInvitation(this.selectedEvent.id, volunteerEmails)
+    const invitationRequest: ISendInvitationRequest = {
+      eventId: this.selectedEvent.id,
+      volunteerDetails: this.dataSource.data.map(v => new VolunteerDetails(v.id, v.email))
+    };
+
+    console.log(invitationRequest);
+
+    this.invitationsService.sendInvitation(invitationRequest)
       .subscribe({
         next: () => {
           this.dialogRef.close();
