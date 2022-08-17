@@ -30,7 +30,7 @@
                         <!-- <th mat-header-cell *matHeaderCellDef>{{'settings.actions' | translate}}</th> -->
                         <th mat-header-cell *matHeaderCellDef>Actions</th>
                         <td mat-cell *matCellDef="let element" class="selectable-cell">
-                            <button mat-button (click)="invite(element)">
+                            <button mat-button (click)="openInviteDialog(element)">
                                 <mat-icon class="icon-action" 
                                     #tooltip="matTooltip"
                                     matTooltip="Invite volunteers"

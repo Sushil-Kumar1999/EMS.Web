@@ -4,3 +4,12 @@ export interface IUser {
     email: string;
     role: string;
 }
+
+export interface IFindVolunteersCriteria {
+    minAge: number,
+    maxAge: number,
+    minHeight: number,
+    maxHeight: number,
+    minWeight: number,
+    maxWeight: number
+}

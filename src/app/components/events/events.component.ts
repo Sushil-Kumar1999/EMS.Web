@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { IEvent } from 'src/app/models/event.model';
 import { EventsService } from 'src/app/services/events.service';
-import { CreateEventComponent } from '../create-event/create-event.component';
+import { InviteVolunteersComponent } from '../invite-volunteers/invite-volunteers.component';
 
 @Component({
   selector: 'app-events',
@@ -37,8 +37,15 @@ export class EventsComponent implements OnInit {
      });
   }
 
-  public invite(event: IEvent) {
-    console.log(event);
+  public openInviteDialog(event: IEvent) {
+    const config = new MatDialogConfig();
+    config.disableClose = true;
+    config.autoFocus = true;
+    config.minWidth = "800px";
+    config.maxHeight = "500px";
+    config.data = event;
+
+    this.dialog.open(InviteVolunteersComponent, config);
   }
 }
 

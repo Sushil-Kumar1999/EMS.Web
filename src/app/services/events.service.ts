@@ -21,6 +21,10 @@ export class EventsService {
     return this.httpClient.post<number>(`${this.baseUrl}/events`, event);
   }
 
+  public sendInvitation(eventId: number, recipientsEmails: Array<string>) : Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}/events/${eventId}/inviteVolunteers`, recipientsEmails);
+  }
+
   public getMockEvents(): Observable<Array<any>> {
     let events = new Array();
     let event1 = {

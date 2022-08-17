@@ -18,6 +18,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateEventComponent } from './components/create-event/create-event.component';
 import { jqxSchedulerModule } from 'jqwidgets-ng/jqxscheduler';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { InviteVolunteersComponent } from './components/invite-volunteers/invite-volunteers.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     EventsComponent,
     DashboardComponent,
     CreateEventComponent,
-    CalendarComponent
+    CalendarComponent,
+    InviteVolunteersComponent
   ],
   imports: [
     BrowserModule,
