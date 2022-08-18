@@ -1,0 +1,75 @@
+.full-content{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-around;
+}
+.mat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.title {
+    color: #6b6c6d;
+    text-align: center;
+    margin-bottom: 26px;
+    font-weight: bold;
+    font-size: 34px;
+    line-height: 1.2;
+    padding: 10px;
+    margin: 0px;
+}
+
+.wrapper {
+    flex-direction: column;
+    align-content: center;
+    display: flex;
+    flex: 1 1 0;
+    justify-content: center;
+    height: 100%;
+}
+  
+/*------------ User Table ------------*/
+.user-card{
+    margin: 16px;
+    border-radius: 34px;
+  }
+  .table-wrapper {
+    width: 100%;
+  }
+  table {
+    width: 100%;
+    .selected {
+      background-color: lightgrey;
+    }
+    .loader-wrapper {
+      min-height: 24px;
+    }
+    .selectable-cell {
+      cursor: pointer;
+    }
+    .actions-container {
+      text-align: center;
+      width: 48px!important;
+    }
+    td.mat-cell {
+      padding-left: 4px!important;
+      padding-right: 4px!important;
+      word-break: break-word;
+      text-align: center;
+    }
+  }
+  
+  th.mat-header-cell {
+    font-weight: bold;
+    background-color: #f5f5f5;
+    color: black;
+    text-align: center;
+  }
+  .mat-fab-table {
+  background-color: #50979b;
+  }
+  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+    padding-left: 0px;
+  }

@@ -1,0 +1,59 @@
+<mat-tab-group (selectedTabChange)="loadVolunteers($event.tab.textLabel)">
+    <mat-tab label="Invited">
+        <ng-container *ngTemplateOutlet="volunteersTable"></ng-container>
+    </mat-tab>
+
+    <mat-tab label="Accepted">
+        <ng-container *ngTemplateOutlet="volunteersTable"></ng-container>
+    </mat-tab>
+
+    <mat-tab label="Declined"> 
+        <ng-container *ngTemplateOutlet="volunteersTable"></ng-container>
+    </mat-tab>
+
+    <mat-tab label="Confirmed">
+        <ng-container *ngTemplateOutlet="volunteersTable"></ng-container>
+    </mat-tab>
+
+    <mat-tab label="Rejected">
+        <ng-container *ngTemplateOutlet="volunteersTable"></ng-container>
+    </mat-tab>
+</mat-tab-group>
+  
+<ng-template #volunteersTable>
+    <mat-card  class="user-card margin-top-16px">
+        <mat-card-content>
+            <div class="table-wrapper">
+                <table mat-table [dataSource]="dataSource">
+                    <!--Name Column-->
+                    <ng-container matColumnDef="firstName">
+                        <!-- <th mat-header-cell class="w-75" *matHeaderCellDef>#{{'settings.id' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>First Name</th>
+                        <td mat-cell *matCellDef="let element">{{element.firstName}}</td>
+                    </ng-container>
+                    <!--Surname Column-->
+                    <ng-container matColumnDef="lastName">
+                        <!-- <th mat-header-cell class="w-75" *matHeaderCellDef>#{{'settings.id' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>Last Name</th>
+                        <td mat-cell *matCellDef="let element">{{element.lastName}}</td>
+                    </ng-container>
+                    <!--Mail Column-->
+                    <ng-container matColumnDef="email">
+                        <!-- <th mat-header-cell *matHeaderCellDef>{{'settings.name' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>Email</th>
+                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    </ng-container>
+
+                    <!--Headers-->
+                    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+                </table>
+                <div class="loader-wrapper" *ngIf="isLoadingData">
+                    <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+                </div>
+
+                <mat-paginator [pageSizeOptions]="[5, 10]" [length]="dataLength" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</ng-template>
