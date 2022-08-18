@@ -1,4 +1,3 @@
-
 .mat-toolbar{
   background-color: white;
   color: white;
@@ -42,6 +41,12 @@
   &__user {
     font-size: 14px;
   }
+}
+
+.left {
+  text-align: left;
+  color: #50979b;
+  font-size: 15px;
 }
 
 .flex-spacer {
