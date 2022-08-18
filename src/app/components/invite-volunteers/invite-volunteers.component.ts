@@ -7,7 +7,7 @@ import { IEvent } from 'src/app/models/event.model';
 import { ISendInvitationRequest, VolunteerDetails } from 'src/app/models/invitation.model';
 import { IFindVolunteersCriteria, IUser } from 'src/app/models/user.model';
 import { InvitationsService } from 'src/app/services/invitations.service';
-import { UsersService } from 'src/app/services/users.service';
+import { VolunteersService } from 'src/app/services/volunteers.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,7 +25,7 @@ export class InviteVolunteersComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public selectedEvent: IEvent,
               private dialogRef: MatDialogRef<InviteVolunteersComponent>,
-              private usersService: UsersService,
+              private volunteersService: VolunteersService,
               private invitationsService: InvitationsService) { }
   
   criteriaForm = new FormGroup({
@@ -40,7 +40,7 @@ export class InviteVolunteersComponent {
   public findVolunteers(): void {
     const criteria = this.criteriaForm.getRawValue() as IFindVolunteersCriteria;
 
-    this.usersService.findVolunteers(criteria)
+    this.volunteersService.findVolunteers(criteria)
       .subscribe((volunteers : Array<IUser>) => {
         this.dataSource = new MatTableDataSource<IUser>(volunteers);
         this.dataSource.paginator = this.paginator;
