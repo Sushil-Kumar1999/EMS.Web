@@ -35,7 +35,15 @@
                                     #tooltip="matTooltip"
                                     matTooltip="Invite volunteers"
                                     matTooltipPosition="below">
-                                schedule_send
+                                    email
+                                </mat-icon>
+                            </button>
+                            <button mat-button (click)="navigateToInvitations(element)">
+                                <mat-icon  class="icon-action" 
+                                    #tooltip="matTooltip"
+                                    matTooltip="View Invitation Status"
+                                    matTooltipPosition="below">
+                                    arrow_circle_right
                                 </mat-icon>
                             </button>
                         </td>

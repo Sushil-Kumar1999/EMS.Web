@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IEvent } from 'src/app/models/event.model';
 import { EventsService } from 'src/app/services/events.service';
 import { InviteVolunteersComponent } from '../invite-volunteers/invite-volunteers.component';
@@ -22,7 +23,8 @@ export class EventsComponent implements OnInit {
   length = 0;
   isLoadingEvents: boolean = true;
   
-  constructor(private eventsService: EventsService, public dialog: MatDialog) { }
+  constructor(private eventsService: EventsService, public dialog: MatDialog,
+              private router: Router, private route: ActivatedRoute) { }
 
   public ngOnInit(): void {
     this.loadEvents();
@@ -46,6 +48,10 @@ export class EventsComponent implements OnInit {
     config.data = event;
 
     this.dialog.open(InviteVolunteersComponent, config);
+  }
+
+  public navigateToInvitations(event: IEvent) {
+    this.router.navigate([event.id, 'invitations'], { relativeTo: this.route });
   }
 }
 
