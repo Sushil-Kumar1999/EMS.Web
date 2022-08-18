@@ -31,7 +31,7 @@ export class InvitationsForEventComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.selectedEventId = +params['eventId'];
       this.eventsService.getEvent(this.selectedEventId)
-        .subscribe(event => this.selectedEvent = event).unsubscribe();
+        .subscribe(event => this.selectedEvent = event);
       this.findInvitedVolunteers();
     })
   }

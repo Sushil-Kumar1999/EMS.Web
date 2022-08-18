@@ -1,3 +1,7 @@
+<div *ngIf="selectedEvent" class="main-heading">
+    <h2>{{ selectedEvent.title }}</h2>
+</div>
+
 <mat-tab-group (selectedTabChange)="loadVolunteers($event.tab.textLabel)">
     <mat-tab label="Invited">
         <ng-container *ngTemplateOutlet="volunteersTable"></ng-container>

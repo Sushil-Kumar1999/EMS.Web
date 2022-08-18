@@ -21,6 +21,10 @@ export class EventsService {
     return this.httpClient.post<number>(`${this.baseUrl}/events`, event);
   }
 
+  public getEvent(eventId: number): Observable<IEvent> {
+    return this.httpClient.get<IEvent>(`${this.baseUrl}/events/${eventId}`);
+  }
+
   public getMockEvents(): Observable<Array<any>> {
     let events = new Array();
     let event1 = {
