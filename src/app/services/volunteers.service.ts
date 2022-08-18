@@ -28,6 +28,10 @@ export class VolunteersService {
     return this.httpClient.get<Array<IUser>>(`${this.baseUrl}/volunteers/event/${eventId}/invited`);
   }
 
+  public findUnrespondedVolunteers(eventId: number) : Observable<Array<IUser>> {
+    return this.httpClient.get<Array<IUser>>(`${this.baseUrl}/volunteers/event/${eventId}/unresponded`);
+  }
+
   public findAcceptedVolunteers(eventId: number) : Observable<Array<IUser>> {
     return this.httpClient.get<Array<IUser>>(`${this.baseUrl}/volunteers/event/${eventId}/accepted`);
   }
