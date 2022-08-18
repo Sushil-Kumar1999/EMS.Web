@@ -1,3 +1,14 @@
+.button-flex-container {
+  display: flex;
+  justify-content: flex-start;
+  padding: 12px;
+
+  button {
+    margin: 15px;
+  }
+}
+
+
 .main-heading {
   display: flex;
   justify-content: space-around;

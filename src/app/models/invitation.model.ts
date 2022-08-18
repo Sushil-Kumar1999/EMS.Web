@@ -12,3 +12,5 @@ export class VolunteerDetails {
         this.volunteerEmail = email;
     }
 }
+
+export interface UpdateInvitationRequest extends ISendInvitationRequest {}
