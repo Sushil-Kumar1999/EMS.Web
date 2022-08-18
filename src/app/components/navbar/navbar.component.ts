@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
       {id: 2, url: '/users', icon: 'supervisor_account', label: 'Users', selected: false},
       {id: 3, url: '/events', icon: 'event', label: 'Events', selected: false},
     );
-    let option = this.menu_options.find(m => m.url == this.router.url) as MenuOption;
+    let option = this.menu_options.find(m => this.router.url.includes(m.url as string)) as MenuOption;
     option.selected = true;
   }
 
