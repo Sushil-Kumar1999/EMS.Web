@@ -21,8 +21,7 @@ export class VolunteerDashboardComponent implements OnInit {
   isLoadingData: boolean = false;
   tableColumns: string[] = ['title', 'location', 'startDate', 'endDate'];
 
-  constructor(private authService: AuthService, private eventsService: EventsService,
-              private volunteersService: VolunteersService) {  }
+  constructor(private authService: AuthService, private eventsService: EventsService) {  }
 
   ngOnInit(): void {
     this.volunteerId = this.authService.getLoggedInUserId();

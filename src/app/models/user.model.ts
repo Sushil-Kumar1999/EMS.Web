@@ -14,3 +14,9 @@ export interface IFindVolunteersCriteria {
     minWeight: number,
     maxWeight: number
 }
+
+export interface IVolunteer extends IUser {
+    dateOfBirth: Date;
+    height: number;
+    weight: number;
+}
