@@ -20,4 +20,8 @@ export class UsersService {
   public listUsers(): Observable<IUser[]> {
     return this.httpClient.get<IUser[]>(`${this.baseUrl}/users`);
   }
+
+  public getUser(userId: string): Observable<IUser> {
+    return this.httpClient.get<IUser>(`${this.baseUrl}/users/${userId}`);
+  }
 }

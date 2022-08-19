@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IEvent } from 'src/app/models/event.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { EventsService } from 'src/app/services/events.service';
+import { VolunteersService } from 'src/app/services/volunteers.service';
 
 @Component({
   selector: 'app-volunteer-dashboard',
@@ -20,8 +21,8 @@ export class VolunteerDashboardComponent implements OnInit {
   isLoadingData: boolean = false;
   tableColumns: string[] = ['title', 'location', 'startDate', 'endDate'];
 
-  constructor(private authService: AuthService, private eventsService: EventsService
-          ) {  }
+  constructor(private authService: AuthService, private eventsService: EventsService,
+              private volunteersService: VolunteersService) {  }
 
   ngOnInit(): void {
     this.volunteerId = this.authService.getLoggedInUserId();

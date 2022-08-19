@@ -1,9 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { IEvent } from 'src/app/models/event.model';
+import { Component, OnInit } from '@angular/core';
+import { IUser } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { EventsService } from 'src/app/services/events.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -14,10 +11,25 @@ import { UsersService } from 'src/app/services/users.service';
 export class DashboardComponent implements OnInit {
 
   loggedInUserRole!: string;
+  user!: IUser;
+  display: boolean = false;
 
-  constructor(private authService: AuthService) {  }
+  constructor(private authService: AuthService, private usersService: UsersService) {  }
 
   ngOnInit(): void {
     this.loggedInUserRole = this.authService.getLoggedInUserRole();
+
+    if (!this.isLoggedInUserVolunteer()) {
+      let userId: string = this.authService.getLoggedInUserId();
+      this.usersService.getUser(userId)
+        .subscribe(u => {
+          this.user = u;
+          this.display = true;
+        });
+    }
+  }
+
+  public isLoggedInUserVolunteer(): boolean {
+    return this.loggedInUserRole == 'Volunteer';
   }
 }
