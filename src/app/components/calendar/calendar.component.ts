@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { jqxSchedulerComponent } from 'jqwidgets-ng/jqxscheduler';
-import { ICreateEventRequest } from 'src/app/models/event.model';
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs/internal/observable/of';
+import { ICreateEventRequest, IEvent } from 'src/app/models/event.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { EventsService } from 'src/app/services/events.service';
 import Swal from 'sweetalert2';
 
@@ -38,15 +41,24 @@ export class CalendarComponent implements AfterViewInit {
       subject: "title"
   };
 
-  constructor(private eventsService: EventsService ) { }
+  constructor(private eventsService: EventsService, private authService: AuthService ) { }
   
   ngAfterViewInit(): void {
     this.getEvents();
   }
 
-  getEvents() {
-    this.eventsService.listEvents()
-      .subscribe(events => {
+  getEvents(): void {
+    let events$: Observable<Array<IEvent>>;
+
+    if (this.authService.getLoggedInUserRole() == 'Volunteer') {
+      let volunteerId: string = this.authService.getLoggedInUserId();
+      events$ = this.eventsService.findEventsConfirmedFor(volunteerId);
+    }
+    else {
+      events$ = this.eventsService.listEvents();
+    }
+    
+    events$.subscribe(events => {
         this.scheduler.beginAppointmentsUpdate();
         this.source.localData = events;
         this.dataAdapter = new jqx.dataAdapter(this.source);
