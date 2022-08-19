@@ -1,0 +1,86 @@
+<div>
+    <h1>Profile Information</h1>
+    <p>Profile info</p>
+</div>
+
+<div>
+    <h2>Your participation record</h2>
+    <mat-tab-group (selectedTabChange)="loadEvents($event.tab.textLabel)">
+
+        <mat-tab label="Invited">
+            <h3>All events you were invited to participate</h3>
+            <ng-container *ngTemplateOutlet="eventsTable"></ng-container>
+        </mat-tab>
+
+        <mat-tab label="Unresponded">
+            <h3>All events you were invited to participate but have not responded yet.
+                Please check your email inbox and respond ASAP</h3>
+            <ng-container *ngTemplateOutlet="eventsTable"></ng-container>
+        </mat-tab>
+
+        <mat-tab label="Accepted">
+            <h3>All events you have accepted to participate in.
+            Please wait to hear back from us whether you were selected or not</h3>
+            <ng-container *ngTemplateOutlet="eventsTable"></ng-container>
+        </mat-tab>
+
+        <mat-tab label="Declined">
+            <h3>All events you declined to participate</h3>
+            <ng-container *ngTemplateOutlet="eventsTable"></ng-container>
+        </mat-tab>
+
+        <mat-tab label="Confirmed">
+            <h3>All events you have been selected for participation</h3>
+            <ng-container *ngTemplateOutlet="eventsTable"></ng-container>
+        </mat-tab>
+
+        <mat-tab label="Rejected">
+            <h3>All events you were not selected for participation</h3>
+            <ng-container *ngTemplateOutlet="eventsTable"></ng-container>
+        </mat-tab>
+
+    </mat-tab-group>
+</div>
+
+<ng-template #eventsTable>
+    <mat-card  class="user-card margin-top-16px">
+        <mat-card-content>
+            <div class="table-wrapper">
+                <table mat-table [dataSource]="dataSource">
+                    <!--Name Column-->
+                    <ng-container matColumnDef="title">
+                        <!-- <th mat-header-cell class="w-75" *matHeaderCellDef>#{{'settings.id' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>Title</th>
+                        <td mat-cell *matCellDef="let element">{{element.title}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="location">
+                        <!-- <th mat-header-cell class="w-75" *matHeaderCellDef>#{{'settings.id' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>Location</th>
+                        <td mat-cell *matCellDef="let element">{{element.location }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="startDate">
+                        <!-- <th mat-header-cell class="w-75" *matHeaderCellDef>#{{'settings.id' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>Start Date</th>
+                        <td mat-cell *matCellDef="let element">{{element.startDate | date:'medium'}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="endDate">
+                        <!-- <th mat-header-cell *matHeaderCellDef>{{'settings.name' | translate}}</th> -->
+                        <th mat-header-cell *matHeaderCellDef>End Date</th>
+                        <td mat-cell *matCellDef="let element"> {{element.endDate | date:'medium'}} </td>
+                    </ng-container>
+                    
+                    <!--Headers-->
+                    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+                </table>
+                <div class="loader-wrapper" *ngIf="isLoadingData">
+                    <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+                </div>
+                <mat-paginator [pageSizeOptions]="[5, 10]" [length]="dataLength" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</ng-template>
