@@ -25,62 +25,27 @@ export class EventsService {
     return this.httpClient.get<IEvent>(`${this.baseUrl}/events/${eventId}`);
   }
 
-  public getMockEvents(): Observable<Array<any>> {
-    let events = new Array();
-    let event1 = {
-        id: 1,
-        description: "George brings projector for presentations.",
-        location: "Barbados",
-        title: "Quarterly Project Review Meeting",
-        startDate: new Date(2022, 7, 23, 9, 0, 0),
-        endDate: new Date(2022, 7, 23, 16, 0, 0)
-    };
-    let event2 = {
-        id: 2,
-        description: "",
-        location: "Bermuda",
-        title: "IT Group Mtg.",
-        startDate: new Date(2022, 7, 24, 10, 0, 0),
-        endDate: new Date(2022, 7, 24, 15, 0, 0)
-    };
-    let event3 = {
-        id: 3,
-        description: "",
-        location: "Jamaica",
-        title: "Course Social Media",
-        startDate: new Date(2022, 7, 27, 11, 0, 0),
-        endDate: new Date(2022, 7, 27, 13, 0, 0)
-    };
-    let event4 = {
-        id: 4,
-        description: "",
-        location: "Haiti",
-        title: "New Projects Planning",
-        startDate: new Date(2022, 7, 23, 16, 0, 0),
-        endDate: new Date(2022, 7, 23, 18, 0, 0)
-    };
-    let event5 = {
-        id: 5,
-        description: "",
-        location: "Trinidad",
-        title: "Interview with James",
-        startDate: new Date(2022, 7, 25, 15, 0, 0),
-        endDate: new Date(2022, 7, 25, 17, 0, 0)
-    };
-    let event6 = {
-        id: 6,
-        description: "",
-        location: "Angola",
-        title: "Interview with Nancy",
-        startDate: new Date(2022, 7, 26, 14, 0, 0),
-        endDate: new Date(2022, 7, 26, 16, 0, 0)
-    };
-    events.push(event1);
-    events.push(event2);
-    events.push(event3);
-    events.push(event5);
-    events.push(event6);
+  public findEventsInvitedTo(volunteerId: string) : Observable<Array<IEvent>> {
+    return this.httpClient.get<Array<IEvent>>(`${this.baseUrl}/events/volunteer/${volunteerId}/invited`);
+  }
 
-    return of(events);
+  public findEventsUnrespondedTo(volunteerId: string) : Observable<Array<IEvent>> {
+    return this.httpClient.get<Array<IEvent>>(`${this.baseUrl}/events/volunteer/${volunteerId}/unresponded`);
+  }
+
+  public findEventsAccepted(volunteerId: string) : Observable<Array<IEvent>> {
+    return this.httpClient.get<Array<IEvent>>(`${this.baseUrl}/events/volunteer/${volunteerId}/accepted`);
+  }
+
+  public findEventsDeclined(volunteerId: string) : Observable<Array<IEvent>> {
+    return this.httpClient.get<Array<IEvent>>(`${this.baseUrl}/events/volunteer/${volunteerId}/declined`);
+  }
+
+  public findEventsConfirmedFor(volunteerId: string) : Observable<Array<IEvent>> {
+    return this.httpClient.get<Array<IEvent>>(`${this.baseUrl}/events/volunteer/${volunteerId}/confirmed`);
+  }
+
+  public findEventsRejectedFor(volunteerId: string) : Observable<Array<IEvent>> {
+    return this.httpClient.get<Array<IEvent>>(`${this.baseUrl}/events/volunteer/${volunteerId}/rejected`);
   }
 }

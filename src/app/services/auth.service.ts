@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment'
-import { ILoginResponse } from '../models/login-response.model';
+import { ILoginResponse } from '../models/login.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,6 @@ export class AuthService {
   loginEmail: string|any;
   token: string|any;
   baseUrl = environment.baseUrl;
-  public LOGGED_IN_USER_ROLE: string = '';
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -50,7 +49,16 @@ export class AuthService {
 
   public setLoggedInUserRole(): void {
     const tokenPayload = this.parseJwt(localStorage.getItem('token') as string);
-    this.LOGGED_IN_USER_ROLE = tokenPayload.role;
+    localStorage.setItem('userRole', tokenPayload.role);
+    localStorage.setItem('userId', tokenPayload.Id);
+  }
+
+  public getLoggedInUserRole(): string {
+    return localStorage.getItem('userRole') as string;
+  }
+
+  public getLoggedInUserId(): string {
+    return localStorage.getItem('userId') as string;
   }
 
   private parseJwt (token: string) {
