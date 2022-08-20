@@ -11,22 +11,27 @@ export class NavbarComponent implements OnInit {
 
   userName: string | null;
   // Role of the User
-  role = '';
+  userRole!: string;
 
   menu_options: MenuOption[] = [];
   selected?: number = -1;
 
   constructor(private authService: AuthService, private router: Router) { 
     this.userName = localStorage.getItem('loginEmail');
+    this.userRole = this.authService.getLoggedInUserRole();
   }   
 
   ngOnInit(): void {
     this.menu_options.push(
       {id: 0, url: '/dashboard', icon: 'dashboard', label: 'Dashboard', selected: false},
       {id: 1, url: '/calendar', icon: 'calendar_month', label: 'Calendar', selected: false},
-      {id: 2, url: '/users', icon: 'supervisor_account', label: 'Users', selected: false},
       {id: 3, url: '/events', icon: 'event', label: 'Events', selected: false},
     );
+
+    if (this.userRole !== 'Volunteer') {
+      this.menu_options.push( {id: 2, url: '/users', icon: 'supervisor_account', label: 'Users', selected: false},)
+    }
+
     let option = this.menu_options.find(m => this.router.url.includes(m.url as string)) as MenuOption;
     option.selected = true;
   }

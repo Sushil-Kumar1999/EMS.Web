@@ -9,6 +9,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UsersComponent } from './components/users/users.component';
 import { AuthGuard } from './guards/auth.guard';
+import { UserNotVolunteerGuard } from './guards/user-not-volunteer.guard';
 
 const routes: Routes = [
   {   
@@ -19,7 +20,7 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'calendar', component: CalendarComponent },
-      { path: 'users', component: UsersComponent },
+      { path: 'users', component: UsersComponent, canActivate: [UserNotVolunteerGuard]},
       { path: 'events', component: EventsComponent },
       { path: 'events/:eventId/invitations', component: InvitationsForEventComponent, pathMatch: 'full'},
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
