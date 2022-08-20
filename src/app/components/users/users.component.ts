@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RegisterUserComponent } from '../register-user/register-user.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageKeys } from 'src/app/Utils/local-storage-keys';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -72,7 +73,16 @@ export class UsersComponent implements OnInit {
   }
 
   public loadUsers(): void {
-    this.usersService.listUsers().subscribe((users : IUser[]) => {
+    let users$: Observable<Array<IUser>>;
+
+    if (localStorage.getItem(LocalStorageKeys.USER_ROLE) === "Organiser") {
+      users$ = this.usersService.listUsers("Volunteer")
+    }
+    else {
+      users$ = this.usersService.listUsers();
+    }
+
+    users$.subscribe((users : IUser[]) => {
       this.dataSource = new MatTableDataSource<IUser>(users);
       this.dataSource.paginator = this.paginator;
       this.length = users.length;

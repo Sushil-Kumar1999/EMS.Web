@@ -17,8 +17,10 @@ export class UsersService {
     return this.httpClient.post(`${this.baseUrl}/users/register`, user);
   }
 
-  public listUsers(): Observable<IUser[]> {
-    return this.httpClient.get<IUser[]>(`${this.baseUrl}/users`);
+  public listUsers(role: string = ''): Observable<IUser[]> {
+
+    return this.httpClient.get<IUser[]>(`${this.baseUrl}/users`, 
+      { params: new HttpParams().set('role', role) });
   }
 
   public getUser(userId: string): Observable<IUser> {
