@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { ICreateEventRequest, IEvent } from 'src/app/models/event.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { EventsService } from 'src/app/services/events.service';
+import { LocalStorageKeys } from 'src/app/Utils/local-storage-keys';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -77,7 +78,7 @@ export class CalendarComponent implements AfterViewInit {
     fields?.fromLabel.html("Start Date");
     fields?.toLabel.html("End Date");
 
-    if (localStorage.getItem('userRole') === "Volunteer") {
+    if (localStorage.getItem(LocalStorageKeys.USER_ROLE) === "Volunteer") {
       fields?.saveButton.hide();
     }
   };

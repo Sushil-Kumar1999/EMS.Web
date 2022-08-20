@@ -8,6 +8,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { IUser } from 'src/app/models/user.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { RegisterUserComponent } from '../register-user/register-user.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageKeys } from 'src/app/Utils/local-storage-keys';
 
 @Component({
   selector: 'app-users',
@@ -24,20 +26,25 @@ export class UsersComponent implements OnInit {
 
   length = 0;
   isLoadingUsers: boolean = true;
+  userRole!: string;
 
-  constructor(public dialog: MatDialog, private usersService: UsersService) {}
+  constructor(public dialog: MatDialog, private usersService: UsersService,
+              private authService: AuthService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loadUsers();
-    
   }
 
-  registerForm = new FormGroup({
+  public registerForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     email: new FormControl('' , [Validators.required, Validators.email]),
     role: new FormControl('', [Validators.required])
   });
+
+  public isUserAdmin(): boolean {
+    return localStorage.getItem(LocalStorageKeys.USER_ROLE) == "Admin";
+  }
 
   public registerUser(): void {
     if (!this.registerForm.valid) {
@@ -64,7 +71,7 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  loadUsers() {
+  public loadUsers(): void {
     this.usersService.listUsers().subscribe((users : IUser[]) => {
       this.dataSource = new MatTableDataSource<IUser>(users);
       this.dataSource.paginator = this.paginator;
@@ -73,7 +80,7 @@ export class UsersComponent implements OnInit {
      });
   }
 
-  openRegisterUserForm() {
+  public openRegisterUserForm(): void {
     const config = new MatDialogConfig();
     config.disableClose = true;
     config.autoFocus = true;

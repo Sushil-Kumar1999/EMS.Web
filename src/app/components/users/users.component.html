@@ -58,7 +58,7 @@
                         <th mat-header-cell *matHeaderCellDef>
                         <button mat-mini-fab class="mat-fab-table"
                                 (click)="openRegisterUserForm()"
-                                disabled="false">
+                                *ngIf="isUserAdmin()">
                             <mat-icon #tooltip="matTooltip"
                                 matTooltip="Create New User"
                                 matTooltipPosition="below">
