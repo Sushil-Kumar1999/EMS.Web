@@ -100,4 +100,8 @@ export class CalendarComponent implements AfterViewInit {
         });
       });
   }
+
+  public exportToExcel(): void {
+    this.scheduler.exportData('xls');
+  }
 }

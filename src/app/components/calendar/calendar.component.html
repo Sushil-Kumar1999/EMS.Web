@@ -1,4 +1,5 @@
 <jqxScheduler #schedulerReference
+    style="margin: 16px"
     [theme]="'material'"
     [showLegend]="true"
     [width]="800"
@@ -11,3 +12,11 @@
     (onAppointmentAdd)="createNewEvent($event)"
     >
 </jqxScheduler>
+
+<button mat-button
+        mat-raised-button
+        color="primary"
+        style="margin: 0px 16px 16px 16px"
+        (click)="exportToExcel()">
+    Export to Excel
+</button>
