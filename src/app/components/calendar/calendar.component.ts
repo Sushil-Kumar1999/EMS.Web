@@ -41,8 +41,8 @@ export class CalendarComponent implements AfterViewInit {
       subject: "title"
   };
 
-  constructor(private eventsService: EventsService, private authService: AuthService) { }
-  
+  constructor(private eventsService: EventsService) {}
+
   ngAfterViewInit(): void {
     this.getEvents();
   }
@@ -66,7 +66,7 @@ export class CalendarComponent implements AfterViewInit {
       });
   }
 
-  editDialogCreate(dialog?: jqwidgets.SchedulerEditDialogCreate['dialog'],
+  public editDialogCreate(dialog?: jqwidgets.SchedulerEditDialogCreate['dialog'],
                   fields?: jqwidgets.SchedulerEditDialogCreate['fields'],
                   editAppointment?: jqwidgets.SchedulerEditDialogCreate['editAppointment']) {
     fields?.repeatContainer.hide();
@@ -78,8 +78,13 @@ export class CalendarComponent implements AfterViewInit {
     fields?.fromLabel.html("Start Date");
     fields?.toLabel.html("End Date");
 
-    if (localStorage.getItem(LocalStorageKeys.USER_ROLE) === "Volunteer") {
+    let userRole = localStorage.getItem(LocalStorageKeys.USER_ROLE) as string;
+    if (userRole === "Volunteer") {
       fields?.saveButton.hide();
+    }
+    console.log(userRole, userRole !== "Admin");
+    if (userRole !== "Admin") {
+      fields?.deleteButton.remove();
     }
   };
 
