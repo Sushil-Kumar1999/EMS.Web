@@ -11,3 +11,5 @@ export interface ICreateEventRequest
     startDate: Date;
     endDate: Date;
 }
+
+export interface IUpdateEventRequest extends ICreateEventRequest {}

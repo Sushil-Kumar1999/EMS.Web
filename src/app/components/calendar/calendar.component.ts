@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { jqxSchedulerComponent } from 'jqwidgets-ng/jqxscheduler';
 import { Observable } from 'rxjs/internal/Observable';
-import { of } from 'rxjs/internal/observable/of';
 import { ICreateEventRequest, IEvent } from 'src/app/models/event.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { EventsService } from 'src/app/services/events.service';
@@ -41,7 +40,7 @@ export class CalendarComponent implements AfterViewInit {
       subject: "title"
   };
 
-  constructor(private eventsService: EventsService, private authService: AuthService ) { }
+  constructor(private eventsService: EventsService, private authService: AuthService) { }
   
   ngAfterViewInit(): void {
     this.getEvents();
@@ -77,9 +76,13 @@ export class CalendarComponent implements AfterViewInit {
     fields?.locationLabel.html("Location");
     fields?.fromLabel.html("Start Date");
     fields?.toLabel.html("End Date");
+
+    if (localStorage.getItem('userRole') === "Volunteer") {
+      fields?.saveButton.hide();
+    }
   };
 
-  createNewEvent(event: any): void{
+  public createNewEvent(event: any): void{
     let appointment = event.args.appointment.originalData;
    
     const newEvent: ICreateEventRequest = {
@@ -95,6 +98,28 @@ export class CalendarComponent implements AfterViewInit {
         Swal.fire({
           title: 'Success',
           text: 'New event created successfully',
+          icon: 'success',
+          showCloseButton: true
+        });
+      });
+  }
+
+  public updateEvent(event: any) {
+    let appointment = event.args.appointment.originalData;
+   
+    const updateEventRequest: ICreateEventRequest = { 
+      title: appointment.title,
+      description :appointment.description,
+      location: appointment.location,
+      startDate: appointment.startDate,
+      endDate: appointment.endDate
+    };
+
+    this.eventsService.updateEvent(appointment.id, updateEventRequest)
+      .subscribe(() => {
+        Swal.fire({
+          title: 'Success',
+          text: 'Event updated successfully',
           icon: 'success',
           showCloseButton: true
         });

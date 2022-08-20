@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ICreateEventRequest, IEvent } from '../models/event.model';
+import { ICreateEventRequest, IEvent, IUpdateEventRequest } from '../models/event.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,10 @@ export class EventsService {
 
   public createEvent(event: ICreateEventRequest): Observable<number> {
     return this.httpClient.post<number>(`${this.baseUrl}/events`, event);
+  }
+
+  public updateEvent(eventId: number, event: IUpdateEventRequest): Observable<number> {
+    return this.httpClient.patch<number>(`${this.baseUrl}/events/${eventId}`, event);
   }
 
   public getEvent(eventId: number): Observable<IEvent> {
