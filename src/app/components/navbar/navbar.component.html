@@ -4,6 +4,7 @@
     </div>
 
     <div class="right">
+      <div class="rounded-purple-badge">{{ userRole}}</div>
       <div class="right-user" *ngIf="userName">{{userName}}</div>
       <!--Logout Button-->
       <button mat-button (click)="logout()" class="right-login-btn">
