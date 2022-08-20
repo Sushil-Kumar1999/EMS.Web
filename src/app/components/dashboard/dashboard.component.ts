@@ -3,6 +3,7 @@ import { IUser, IVolunteer } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
 import { VolunteersService } from 'src/app/services/volunteers.service';
+import { LocalStorageKeys } from 'src/app/Utils/local-storage-keys';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,8 +22,8 @@ export class DashboardComponent implements OnInit {
               private volunteersService: VolunteersService) {  }
 
   ngOnInit(): void {
-    this.loggedInUserRole = this.authService.getLoggedInUserRole();
-    let userId: string = this.authService.getLoggedInUserId();
+    this.loggedInUserRole = localStorage.getItem(LocalStorageKeys.USER_ROLE) as string;
+    let userId: string = localStorage.getItem(LocalStorageKeys.USER_ID) as string;
 
     if (!this.isLoggedInUserVolunteer()) {
       this.usersService.getUser(userId)

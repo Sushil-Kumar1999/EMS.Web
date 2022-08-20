@@ -50,8 +50,8 @@ export class CalendarComponent implements AfterViewInit {
   getEvents(): void {
     let events$: Observable<Array<IEvent>>;
 
-    if (this.authService.getLoggedInUserRole() == 'Volunteer') {
-      let volunteerId: string = this.authService.getLoggedInUserId();
+    if (localStorage.getItem(LocalStorageKeys.USER_ROLE)== 'Volunteer') {
+      let volunteerId: string = localStorage.getItem(LocalStorageKeys.USER_ID) as string;
       events$ = this.eventsService.findEventsConfirmedFor(volunteerId);
     }
     else {

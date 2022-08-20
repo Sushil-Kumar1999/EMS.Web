@@ -5,6 +5,7 @@ import { IEvent } from 'src/app/models/event.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { EventsService } from 'src/app/services/events.service';
 import { VolunteersService } from 'src/app/services/volunteers.service';
+import { LocalStorageKeys } from 'src/app/Utils/local-storage-keys';
 
 @Component({
   selector: 'app-volunteer-dashboard',
@@ -24,7 +25,7 @@ export class VolunteerDashboardComponent implements OnInit {
   constructor(private authService: AuthService, private eventsService: EventsService) {  }
 
   ngOnInit(): void {
-    this.volunteerId = this.authService.getLoggedInUserId();
+    this.volunteerId = localStorage.getItem(LocalStorageKeys.USER_ID) as string;
     this.findEventsInvitedTo();
   }
 

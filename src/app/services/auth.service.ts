@@ -26,11 +26,14 @@ export class AuthService {
   }
 
   public saveToken(loginEmail: string, token: string) : void {
-    localStorage.setItem('loginEmail', loginEmail);
-    localStorage.setItem('token', token);
-
     this.loginEmail = loginEmail;
     this.token = token;
+
+    localStorage.setItem('loginEmail', loginEmail);
+    localStorage.setItem('token', token);
+    const tokenPayload = this.parseJwt(token);
+    localStorage.setItem('userRole', tokenPayload.role);
+    localStorage.setItem('userId', tokenPayload.Id);
   }
 
   public logout(): void {
@@ -45,20 +48,6 @@ export class AuthService {
 
   public isLoggedIn(): boolean {
     return !(typeof this.token === 'undefined' || this.token === null || this.token === '');
-  }
-
-  public setLoggedInUserRole(): void {
-    const tokenPayload = this.parseJwt(localStorage.getItem('token') as string);
-    localStorage.setItem('userRole', tokenPayload.role);
-    localStorage.setItem('userId', tokenPayload.Id);
-  }
-
-  public getLoggedInUserRole(): string {
-    return localStorage.getItem('userRole') as string;
-  }
-
-  public getLoggedInUserId(): string {
-    return localStorage.getItem('userId') as string;
   }
 
   private parseJwt (token: string) {

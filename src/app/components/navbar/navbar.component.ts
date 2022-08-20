@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageKeys } from 'src/app/Utils/local-storage-keys';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) { 
     this.userName = localStorage.getItem('loginEmail');
-    this.userRole = this.authService.getLoggedInUserRole();
+    this.userRole = localStorage.getItem(LocalStorageKeys.USER_ROLE) as string;
   }   
 
   ngOnInit(): void {
