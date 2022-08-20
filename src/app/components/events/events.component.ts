@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IEvent } from 'src/app/models/event.model';
 import { EventsService } from 'src/app/services/events.service';
+import { LocalStorageKeys } from 'src/app/Utils/local-storage-keys';
 import { InviteVolunteersComponent } from '../invite-volunteers/invite-volunteers.component';
 
 @Component({
@@ -18,7 +19,7 @@ export class EventsComponent implements OnInit {
   pageSizeOptions = [5, 10];
 
   dataSource!: MatTableDataSource<IEvent>;
-  tableColumns: string[] = ['title', 'startDate', 'endDate', 'actions'];
+  tableColumns: string[] = ['title', 'startDate', 'endDate'];
 
   length = 0;
   isLoadingEvents: boolean = true;
@@ -28,6 +29,13 @@ export class EventsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.loadEvents();
+    if (!this.isUserVolunteer) {
+      this.tableColumns.push('actions');
+    }
+  }
+
+  public isUserVolunteer(): boolean {
+    return localStorage.getItem(LocalStorageKeys.USER_ROLE) == "Volunteer";
   }
 
   public loadEvents() : void {

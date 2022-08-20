@@ -26,12 +26,12 @@
                     </ng-container>
 
                     <!--Actions Column-->
-                    <ng-container matColumnDef="actions">
+                    <ng-container *ngIf="!isUserVolunteer()" matColumnDef="actions">
                         <!-- <th mat-header-cell *matHeaderCellDef>{{'settings.actions' | translate}}</th> -->
                         <th mat-header-cell *matHeaderCellDef>Actions</th>
                         <td mat-cell *matCellDef="let element" class="selectable-cell">
                             <button mat-button (click)="openInviteDialog(element)">
-                                <mat-icon class="icon-action" 
+                                <mat-icon class="icon-action"
                                     #tooltip="matTooltip"
                                     matTooltip="Invite volunteers"
                                     matTooltipPosition="below">
