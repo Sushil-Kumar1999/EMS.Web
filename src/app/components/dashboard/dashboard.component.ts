@@ -17,8 +17,7 @@ export class DashboardComponent implements OnInit {
   volunteer!: IVolunteer;
   display: boolean = false;
 
-  constructor(private authService: AuthService,
-              private usersService: UsersService,
+  constructor(private usersService: UsersService,
               private volunteersService: VolunteersService) {  }
 
   ngOnInit(): void {

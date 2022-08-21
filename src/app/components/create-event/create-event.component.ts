@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ICreateEventRequest } from 'src/app/models/event.model';
@@ -48,9 +48,5 @@ export class CreateEventComponent {
           this.showProgressBar = false;
         }
       });
-  }
-
-  hello(event: any) {
-    console.log(this.createEventForm.getRawValue().startDate);
   }
 }
