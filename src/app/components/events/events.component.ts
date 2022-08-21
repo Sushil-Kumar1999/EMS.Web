@@ -28,10 +28,10 @@ export class EventsComponent implements OnInit {
               private router: Router, private route: ActivatedRoute) { }
 
   public ngOnInit(): void {
-    this.loadEvents();
-    if (!this.isUserVolunteer) {
+    if (!this.isUserVolunteer()) {
       this.tableColumns.push('actions');
     }
+    this.loadEvents();
   }
 
   public isUserVolunteer(): boolean {
