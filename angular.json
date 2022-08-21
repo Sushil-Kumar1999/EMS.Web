@@ -31,7 +31,8 @@
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss",
               "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css",
-              "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.material.css"
+              "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.material.css",
+              "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.material-purple.css"
             ],
             "scripts": []
           },
@@ -102,7 +103,8 @@
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss",
               "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css",
-              "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.material.css"
+              "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.material.css",
+              "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.material-purple.css"
             ],
             "scripts": []
           }
