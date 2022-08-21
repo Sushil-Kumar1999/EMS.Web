@@ -21,6 +21,21 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { InviteVolunteersComponent } from './components/invite-volunteers/invite-volunteers.component';
 import { InvitationsForEventComponent } from './components/invitations-for-event/invitations-for-event.component';
 import { VolunteerDashboardComponent } from './components/volunteer-dashboard/volunteer-dashboard.component';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+
+const MY_DATE_FORMAT = {
+  parse: {
+    dateInput: 'DD/MM/YYYY', // this is how your date will be parsed from Input
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY', // this is how your date will get displayed on the Input
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  }
+};
 
 @NgModule({
   declarations: [
@@ -58,7 +73,9 @@ import { VolunteerDashboardComponent } from './components/volunteer-dashboard/vo
       provide: HTTP_INTERCEPTORS,
       useClass: ResponseInterceptor,
       multi: true
-    }
+    },
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT }
   ],
   bootstrap: [AppComponent]
 })

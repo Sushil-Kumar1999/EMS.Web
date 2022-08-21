@@ -94,7 +94,8 @@ export class UsersComponent implements OnInit {
     const config = new MatDialogConfig();
     config.disableClose = true;
     config.autoFocus = true;
-    config.width = "500px";
+    config.minWidth = "800px";
+    config.maxHeight = "500px";
 
     var ref = this.dialog.open(RegisterUserComponent, config);
     ref.afterClosed().subscribe(() => this.loadUsers());

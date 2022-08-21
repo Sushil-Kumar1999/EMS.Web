@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ICreateVolunteerRequest } from '../models/register-user-request.model';
 import { IFindVolunteersCriteria, IUser, IVolunteer } from '../models/user.model';
 
 @Injectable({
@@ -50,5 +51,9 @@ export class VolunteersService {
 
   public getVolunteer(volunteerId: string): Observable<IVolunteer> {
     return this.httpClient.get<IVolunteer>(`${this.baseUrl}/volunteers/${volunteerId}`);
+  }
+
+  public createVolunteer(req: ICreateVolunteerRequest): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}/volunteers/`, req);
   }
 }

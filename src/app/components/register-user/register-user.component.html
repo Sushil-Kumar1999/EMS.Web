@@ -8,6 +8,15 @@
     <mat-card>
         <mat-card-content>
             <form class="wrapper" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+                <mat-form-field appearance="fill">
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="role" (selectionChange)="onSelectionChange($event.value)">
+                        <mat-option value="Admin">Admin</mat-option>
+                        <mat-option value="Organiser">Organiser</mat-option>
+                        <mat-option value="Volunteer">Volunteer</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
                 <mat-form-field appearance="outline">
                     <mat-label>First Name</mat-label>
                     <input
@@ -34,14 +43,35 @@
                         placeholder="Email"
                     />
                 </mat-form-field>
+
+                <mat-form-field *ngIf="volunteerRoleSelected" appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+                    <mat-hint>DD/MM/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
                 
-                <mat-form-field appearance="fill">
-                    <mat-label>Role</mat-label>
-                    <mat-select formControlName="role">
-                        <mat-option value="Admin">Admin</mat-option>
-                        <mat-option value="Organiser">Organiser</mat-option>
-                        <mat-option value="Volunteer">Voluneer</mat-option>
-                    </mat-select>
+                <mat-form-field *ngIf="volunteerRoleSelected" appearance="outline">
+                    <mat-label>Height (in cm)</mat-label>
+                    <input
+                        type="number"
+                        min="1"
+                        matInput
+                        formControlName="height"
+                        placeholder="Height (in cm)"
+                    />
+                </mat-form-field>
+
+                <mat-form-field *ngIf="volunteerRoleSelected" appearance="outline">
+                    <mat-label>Weight (in Kg)</mat-label>
+                    <input
+                        type="number"
+                        min="1"
+                        matInput
+                        formControlName="weight"
+                        placeholder="Weight (in Kg)"
+                    />
                 </mat-form-field>
 
                 <button mat-button [disabled]="!this.registerForm.valid"
